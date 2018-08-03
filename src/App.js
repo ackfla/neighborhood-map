@@ -4,13 +4,21 @@ import MapContainer from './Map';
 import Locations from './data/locations'
 
 class App extends Component {
+
+  componentWillMount() {
+    this.setState({
+      locations: Locations
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <MapContainer />
+        <MapContainer locations={this.state.locations} />
       </div>
     );
   }
+
 }
 
 export default App;
