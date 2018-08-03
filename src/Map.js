@@ -8,6 +8,29 @@ export class MapContainer extends Component {
     this.map = React.createRef();
   }
 
+  // Generate markers
+  markersInit() {
+    // Get map instance from map ref
+    const map = this.map.current.map;
+    //Get list of locations from props
+    const locations = this.props.locations;
+    // Loop of location data
+    for (let i = 0; i < locations.length; i++) {
+      // For each location create a marker instance
+      let marker = new this.props.google.maps.Marker({
+        position: locations[i].location,
+        map: map,
+        title: locations[i].title,
+        id: i  // unique id
+      });
+    }
+  }
+
+  componentDidMount() {
+    // Create all markers on component mount
+    this.markersInit();
+  }
+
   render() {
     return (
       <Map
