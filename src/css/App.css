@@ -19,6 +19,11 @@ nav li {
   border-bottom: 1px solid #6e0938;
 }
 
+nav li:hover {
+  cursor: pointer;
+  background-color: #6e0938;
+}
+
 nav input {
   width: 100%;
   box-sizing: border-box;
