@@ -34,7 +34,11 @@ export class MapContainer extends Component {
         position: locations[i].location,
         map: map,
         title: locations[i].title,
-        id: i  // unique id
+        icon: {
+          url: './cross.png',
+          size: new this.props.google.maps.Size(64, 64),
+          anchor: new this.props.google.maps.Point(32, 32)
+        }
       });
       // Add 'click' event listener to marker for opening infowindow
       marker.addListener('click', () => {
