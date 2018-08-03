@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './css/App.css';
+import './css/solid.css';
 import MapContainer from './Map';
 import Menu from './Menu';
 import Locations from './data/locations'
