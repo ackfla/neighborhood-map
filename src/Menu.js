@@ -13,15 +13,25 @@ class Menu extends Component {
     this.props.onSearch(event.target.value);
   }
 
+  handleClick() {
+    document.getElementById('nav').classList.toggle('open');
+  }
+
   render() {
     return (
-      <nav>
-        <input
-          type='text'
-          placeholder='Filter by location'
-          value={this.state.query}
-          onChange={this.updateQuery}
+      <nav id='nav'>
+        <button
+          id='menu'
+          onClick={this.handleClick}
         />
+        <span>
+          <input
+            type='text'
+            placeholder='Filter by location'
+            value={this.state.query}
+            onChange={this.updateQuery}
+          />
+        </span>
         <ul>
           {this.props.locations.map((location) => (
             <li

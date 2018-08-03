@@ -7,6 +7,34 @@ nav {
   position: absolute;
   top: 0;
   left: 0;
+  transition: left 0.5s;
+}
+
+nav.open {
+  left: -280px;
+  transition: left 0.5s;
+}
+
+#menu, #menu {
+  position: absolute;
+  left: 280px;
+  top: 0;
+  border: none;
+  height: 47px;
+  width: 47px;
+}
+
+#menu:before {
+  content: '\f0c9';
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+}
+
+#menu:hover, #menu:focus {
+  background-color: #eee;
+  cursor: pointer;
+  outline: none;
 }
 
 nav ul {
@@ -28,4 +56,21 @@ nav input {
   width: 100%;
   box-sizing: border-box;
   padding: 15px;
+}
+
+nav span {
+  position: relative;
+}
+
+nav span:before {
+  content: '\f0b0';
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+  color: #eee;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  z-index: 999;
 }
