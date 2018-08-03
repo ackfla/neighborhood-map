@@ -12,10 +12,17 @@ class App extends Component {
     })
   }
 
+  // Set state using markers array passed from MapContainer component
+  markers = (arr) => {
+    this.setState({
+      markers: arr
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <MapContainer locations={this.state.locations} />
+        <MapContainer markers={this.markers} locations={this.state.locations} />
         <Menu locations={this.state.locations} />
       </div>
     );

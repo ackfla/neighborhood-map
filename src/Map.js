@@ -24,6 +24,8 @@ export class MapContainer extends Component {
     const map = this.map.current.map;
     //Get list of locations from props
     const locations = this.props.locations;
+    // Create empty array to store markers
+    let markers = [];
     // Loop of location data
     for (let i = 0; i < locations.length; i++) {
       // For each location create a marker instance
@@ -37,7 +39,11 @@ export class MapContainer extends Component {
       marker.addListener('click', () => {
         this.onMarkerClick(marker);
       });
+      // push to markers array
+      markers.push(marker);
     }
+    // Pass array of markers to parent component
+    this.props.markers(markers);
   }
 
   onMarkerClick = (marker) => {
