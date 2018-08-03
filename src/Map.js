@@ -3,9 +3,19 @@ import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 
 export class MapContainer extends Component {
 
+  state = {
+    showingInfoWindow: false,
+    activeMarker: {},
+  };
+
   constructor(props) {
     super(props);
     this.map = React.createRef();
+  }
+
+  componentDidMount() {
+    // Create all markers on component mount
+    this.markersInit();
   }
 
   // Generate markers
@@ -23,12 +33,18 @@ export class MapContainer extends Component {
         title: locations[i].title,
         id: i  // unique id
       });
+      // Add 'click' event listener to marker for opening infowindow
+      marker.addListener('click', () => {
+        this.onMarkerClick(marker);
+      });
     }
   }
 
-  componentDidMount() {
-    // Create all markers on component mount
-    this.markersInit();
+  onMarkerClick = (marker) => {
+    this.setState({
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
   }
 
   render() {
@@ -40,7 +56,15 @@ export class MapContainer extends Component {
         initialCenter={{
           lat: 51.9933217,
           lng: -2.1561804
-        }}/>
+        }}>
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}>
+              <div>
+                <h1>{this.state.activeMarker.title}</h1>
+              </div>
+          </InfoWindow>
+        </Map>
     );
   }
 
