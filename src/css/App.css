@@ -8,6 +8,9 @@ nav {
   top: 0;
   left: 0;
   transition: left 0.5s;
+  -webkit-box-shadow: 2px 0px 23px -4px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 0px 23px -4px rgba(0,0,0,0.75);
+  box-shadow: 2px 0px 23px -4px rgba(0,0,0,0.75);
 }
 
 nav.open {
@@ -40,11 +43,20 @@ nav.open {
 nav ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 nav li {
   padding: 10px 15px;
   border-bottom: 1px solid #6e0938;
+  color: #fdfcf8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+nav li:first-of-type {
+  padding-top: 20px;
 }
 
 nav li:hover {
@@ -55,7 +67,8 @@ nav li:hover {
 nav input {
   width: 100%;
   box-sizing: border-box;
-  padding: 15px;
+  padding: 13px;
+  font-size: 14px;
 }
 
 nav span {
