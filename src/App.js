@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MapContainer from './Map';
+import Locations from './data/locations'
 
 class App extends Component {
   render() {
