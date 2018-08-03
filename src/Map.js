@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 
 export class MapContainer extends Component {
+
+  constructor(props) {
+    super(props);
+    this.map = React.createRef();
+  }
+
   render() {
     return (
       <Map
+        ref={this.map}
         google={this.props.google}
         zoom={15}
         initialCenter={{
@@ -13,6 +20,7 @@ export class MapContainer extends Component {
         }}/>
     );
   }
+
 }
 
 export default GoogleApiWrapper({
