@@ -10,6 +10,7 @@ class Menu extends Component {
     this.setState({
       query: event.target.value
     })
+    this.props.onSearch(event.target.value);
   }
 
   render() {
@@ -25,8 +26,9 @@ class Menu extends Component {
           {this.props.locations.map((location) => (
             <li
               onClick={() => this.props.handleClick(location.title)}
-              key={location.title} >
-            {location.title}
+              key={location.title}
+            >
+              {location.title}
             </li>
           ))}
         </ul>
