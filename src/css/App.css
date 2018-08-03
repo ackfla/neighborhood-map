@@ -1,1 +1,20 @@
+nav {
+  width: 280px;
+  height: 100%;
+  background-color: #83003e;
+  color: white;
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  padding: 10px 15px;
+  border-bottom: 1px solid #6e0938;
+}
