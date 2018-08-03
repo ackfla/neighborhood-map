@@ -18,3 +18,9 @@ nav li {
   padding: 10px 15px;
   border-bottom: 1px solid #6e0938;
 }
+
+nav input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+}
