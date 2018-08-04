@@ -63,11 +63,15 @@ export class MapContainer extends Component {
       method: 'GET',
       dataType: 'jsonp',
     }).then(response => {
-      return response.json();
+      if(response.ok) {
+        return response.json();
+      }
     }).then(data => {
       this.markersInit(data.response.venues);
       this.props.fetchedLocations(data.response.venues);
-    })
+    }).catch(function(error) {
+      alert('There has been a problem gathering place data with the FourSquare API request, please try again later');
+    });
   }
 
   onMarkerClick = (marker) => {
