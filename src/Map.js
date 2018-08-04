@@ -6,42 +6,13 @@ export class MapContainer extends Component {
 
   state = {
     showingInfoWindow: false,
-    activeMarker: {},
+    activeMarkerData: {},
+    activeMarker: {}
   };
 
   constructor(props) {
     super(props);
     this.map = React.createRef();
-  }
-
-  // Generate markers
-  fetchData(places) {
-    // Get map instance from map ref
-    const map = this.map.current.map;
-    // Create empty array to store markers
-    let markers = [];
-    // Loop of location data
-    for (let i = 0; i < places.length; i++) {
-      // For each location create a marker instance
-      let marker = new this.props.google.maps.Marker({
-        position: places[i].location,
-        map: map,
-        title: places[i].name,
-        icon: {
-          url: './cross.png',
-          size: new this.props.google.maps.Size(64, 64),
-          anchor: new this.props.google.maps.Point(32, 32)
-        }
-      });
-      // Add 'click' event listener to marker for opening infowindow
-      marker.addListener('click', () => {
-        this.onMarkerClick(marker);
-      });
-      // push to markers array
-      markers.push(marker);
-    }
-    // Pass array of markers to parent component
-    this.props.markers(markers);
   }
 
   // Generate markers
@@ -64,7 +35,8 @@ export class MapContainer extends Component {
           url: './cross.png',
           size: new this.props.google.maps.Size(64, 64),
           anchor: new this.props.google.maps.Point(32, 32)
-        }
+        },
+        id: places[i].id
       });
       // Add 'click' event listener to marker for opening infowindow
       marker.addListener('click', () => {
@@ -96,9 +68,25 @@ export class MapContainer extends Component {
     })
   }
 
+  fetchPlaceData = (placeId) => {
+    // FourSquare API keys
+    const clientId = 'U40I5TMM0E2T0QDMVZBQ34P5KXXR3PR2ZAXXN2RMMNFU215O';
+    const clientSecret = 'LMT2N0IIHG0BAOABOWJ5BGEWWU1F20YXQ2ROBJHLFQ4L1T13';
+
+    fetch('https://api.foursquare.com/v2/venues/' + placeId + '?&client_id=' + clientId + '&client_secret=' + clientSecret + '&v=20180323', {
+      method: 'GET',
+      dataType: 'jsonp',
+    }).then(response => {
+      return response.json();
+    }).then(data => {
+      console.log(data.response.venue);
+    })
+  }
+
   onMarkerClick = (marker) => {
     this.setState({
       activeMarker: marker,
+      activeMarkerData: this.fetchPlaceData(marker.id),
       showingInfoWindow: true
     });
   }
