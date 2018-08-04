@@ -8,8 +8,27 @@ import Locations from './data/locations'
 class App extends Component {
 
   componentWillMount() {
+    this.fetchPlaces('51.9933217,-2.1561804');
     this.setState({
       locations: Locations
+    })
+  }
+
+  fetchPlaces = (location) => {
+    // FourSquare API keys
+    const clientId = 'U40I5TMM0E2T0QDMVZBQ34P5KXXR3PR2ZAXXN2RMMNFU215O';
+    const clientSecret = 'LMT2N0IIHG0BAOABOWJ5BGEWWU1F20YXQ2ROBJHLFQ4L1T13';
+    // Location to search
+    const ll = location;
+    // Number of results to return
+    const limit = 10;
+    fetch('https://api.foursquare.com/v2/venues/search?&ll=' + ll + '&limit=' + limit + '&client_id=' + clientId + '&client_secret=' + clientSecret + '&v=20180323', {
+      method: 'GET',
+      dataType: 'jsonp',
+    }).then(response => {
+      return response.json();
+    }).then(data => {
+      console.log(data.response.venues);
     })
   }
 
