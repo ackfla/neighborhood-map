@@ -12,7 +12,7 @@ class MenuButton extends Component {
   render() {
     return (
       <button
-        tabindex='1'
+        tabindex='2'
         id='menu'
         className='toggle'
         onClick={this.handleClick}

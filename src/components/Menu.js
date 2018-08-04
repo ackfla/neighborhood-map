@@ -22,7 +22,7 @@ class Menu extends Component {
       <nav id='nav' className='toggle'>
         <span>
           <input
-            tabindex='2'
+            tabindex='3'
             type='text'
             placeholder='Filter by location'
             value={this.state.query}
@@ -34,7 +34,7 @@ class Menu extends Component {
             <li
               key={location.id}
             >
-            <button tabindex='3' onClick={() => this.props.handleClick(location.name)}>
+            <button tabindex='4' onClick={() => this.props.handleClick(location.name)}>
               {location.name}
             </button>
             </li>
