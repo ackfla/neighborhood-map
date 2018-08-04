@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
-import MapStyles from './data/map-styles';
+import MapStyles from '../data/map-styles';
 
 export class MapContainer extends Component {
 
