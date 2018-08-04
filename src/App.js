@@ -28,7 +28,9 @@ class App extends Component {
     }).then(response => {
       return response.json();
     }).then(data => {
-      console.log(data.response.venues);
+      this.setState({
+        locations: data.response.venues
+      })
     })
   }
 

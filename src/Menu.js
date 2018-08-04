@@ -35,10 +35,10 @@ class Menu extends Component {
         <ul>
           {this.props.locations.map((location) => (
             <li
-              onClick={() => this.props.handleClick(location.title)}
-              key={location.title}
+              onClick={() => this.props.handleClick(location.name)}
+              key={location.id}
             >
-              {location.title}
+              {location.name}
             </li>
           ))}
         </ul>
