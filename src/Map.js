@@ -6,8 +6,9 @@ export class MapContainer extends Component {
 
   state = {
     showingInfoWindow: false,
-    activeMarkerData: {},
-    activeMarker: {}
+    activeMarker: {
+      address: []
+    }
   };
 
   constructor(props) {
@@ -36,7 +37,8 @@ export class MapContainer extends Component {
           size: new this.props.google.maps.Size(64, 64),
           anchor: new this.props.google.maps.Point(32, 32)
         },
-        id: places[i].id
+        id: places[i].id,
+        address: places[i].location.formattedAddress
       });
       // Add 'click' event listener to marker for opening infowindow
       marker.addListener('click', () => {
@@ -68,25 +70,9 @@ export class MapContainer extends Component {
     })
   }
 
-  fetchPlaceData = (placeId) => {
-    // FourSquare API keys
-    const clientId = 'U40I5TMM0E2T0QDMVZBQ34P5KXXR3PR2ZAXXN2RMMNFU215O';
-    const clientSecret = 'LMT2N0IIHG0BAOABOWJ5BGEWWU1F20YXQ2ROBJHLFQ4L1T13';
-
-    fetch('https://api.foursquare.com/v2/venues/' + placeId + '?&client_id=' + clientId + '&client_secret=' + clientSecret + '&v=20180323', {
-      method: 'GET',
-      dataType: 'jsonp',
-    }).then(response => {
-      return response.json();
-    }).then(data => {
-      console.log(data.response.venue);
-    })
-  }
-
   onMarkerClick = (marker) => {
     this.setState({
       activeMarker: marker,
-      activeMarkerData: this.fetchPlaceData(marker.id),
       showingInfoWindow: true
     });
   }
@@ -106,8 +92,11 @@ export class MapContainer extends Component {
           <InfoWindow
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}>
-              <div>
+              <div className="info-window">
                 <h1>{this.state.activeMarker.title}</h1>
+                {this.state.activeMarker.address.map((line) => (
+                  <p key={this.state.activeMarker.id}>{line}</p>
+                ))}
               </div>
           </InfoWindow>
         </Map>

@@ -55,6 +55,14 @@ nav li {
   font-size: 12px;
 }
 
+.info-window p {
+  margin: 0;
+}
+
+.info-window h1 {
+  margin: 6px 0;  
+}
+
 nav li:first-of-type {
   padding-top: 20px;
 }
