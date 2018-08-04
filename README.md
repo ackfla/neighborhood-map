@@ -34,6 +34,10 @@ Font Awesome icons, Copyright Dave Gandy
 License: SIL Open Font License, version 4.6.1.  
 Source: [http://fontawesome.io](http://fontawesome.io/)
 
+Medieval Flag Icon, Copyright Freepik  
+License: [Creative Commons](http://creativecommons.org/licenses/by/3.0/)  
+Source: [www.flaticon.com](https://www.flaticon.com/free-icon/flag_1043572#term=medieval&page=1&position=41)
+
 ### APIs
 - [Google Maps](https://developers.google.com/maps/documentation/javascript/tutorial) - for map rendering
 - [FourSquare](https://developer.foursquare.com/docs/api/getting-started) - for all location data
