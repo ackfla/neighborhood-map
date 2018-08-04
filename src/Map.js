@@ -14,26 +14,19 @@ export class MapContainer extends Component {
     this.map = React.createRef();
   }
 
-  componentDidMount() {
-    // Create all markers on component mount
-    this.markersInit();
-  }
-
   // Generate markers
-  markersInit() {
+  fetchData(places) {
     // Get map instance from map ref
     const map = this.map.current.map;
-    //Get list of locations from props
-    const locations = this.props.locations;
     // Create empty array to store markers
     let markers = [];
     // Loop of location data
-    for (let i = 0; i < locations.length; i++) {
+    for (let i = 0; i < places.length; i++) {
       // For each location create a marker instance
       let marker = new this.props.google.maps.Marker({
-        position: locations[i].location,
+        position: places[i].location,
         map: map,
-        title: locations[i].title,
+        title: places[i].name,
         icon: {
           url: './cross.png',
           size: new this.props.google.maps.Size(64, 64),
@@ -51,6 +44,58 @@ export class MapContainer extends Component {
     this.props.markers(markers);
   }
 
+  // Generate markers
+  markersInit(places) {
+    if (!places) {
+      return
+    }
+    // Get map instance from map ref
+    const map = this.map.current.map;
+    // Create empty array to store markers
+    let markers = [];
+    // Loop of location data
+    for (let i = 0; i < places.length; i++) {
+      // For each location create a marker instance
+      let marker = new this.props.google.maps.Marker({
+        position: places[i].location,
+        map: map,
+        title: places[i].name,
+        icon: {
+          url: './cross.png',
+          size: new this.props.google.maps.Size(64, 64),
+          anchor: new this.props.google.maps.Point(32, 32)
+        }
+      });
+      // Add 'click' event listener to marker for opening infowindow
+      marker.addListener('click', () => {
+        this.onMarkerClick(marker);
+      });
+      // push to markers array
+      markers.push(marker);
+    }
+    // Pass array of markers to parent component
+    this.props.markers(markers);
+  }
+
+  fetchPlaces = () => {
+    // FourSquare API keys
+    const clientId = 'U40I5TMM0E2T0QDMVZBQ34P5KXXR3PR2ZAXXN2RMMNFU215O';
+    const clientSecret = 'LMT2N0IIHG0BAOABOWJ5BGEWWU1F20YXQ2ROBJHLFQ4L1T13';
+    // Location to search
+    const ll = '51.9915247,-2.1579078';
+    // Number of results to return
+    const limit = 10;
+    fetch('https://api.foursquare.com/v2/venues/search?&ll=' + ll + '&limit=' + limit + '&client_id=' + clientId + '&client_secret=' + clientSecret + '&v=20180323', {
+      method: 'GET',
+      dataType: 'jsonp',
+    }).then(response => {
+      return response.json();
+    }).then(data => {
+      this.markersInit(data.response.venues);
+      this.props.fetchedLocations(data.response.venues);
+    })
+  }
+
   onMarkerClick = (marker) => {
     this.setState({
       activeMarker: marker,
@@ -62,12 +107,13 @@ export class MapContainer extends Component {
     return (
       <Map
         ref={this.map}
+        onReady={this.fetchPlaces}
         styles={MapStyles}
         google={this.props.google}
-        zoom={15}
+        zoom={17}
         initialCenter={{
-          lat: 51.9933217,
-          lng: -2.1561804
+          lat: 51.9915247,
+          lng: -2.1579078
         }}>
           <InfoWindow
             marker={this.state.activeMarker}

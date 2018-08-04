@@ -7,37 +7,23 @@ import Locations from './data/locations'
 
 class App extends Component {
 
-  componentWillMount() {
-    this.fetchPlaces('51.9933217,-2.1561804');
-    this.setState({
-      locations: Locations
-    })
-  }
-
-  fetchPlaces = (location) => {
-    // FourSquare API keys
-    const clientId = 'U40I5TMM0E2T0QDMVZBQ34P5KXXR3PR2ZAXXN2RMMNFU215O';
-    const clientSecret = 'LMT2N0IIHG0BAOABOWJ5BGEWWU1F20YXQ2ROBJHLFQ4L1T13';
-    // Location to search
-    const ll = location;
-    // Number of results to return
-    const limit = 10;
-    fetch('https://api.foursquare.com/v2/venues/search?&ll=' + ll + '&limit=' + limit + '&client_id=' + clientId + '&client_secret=' + clientSecret + '&v=20180323', {
-      method: 'GET',
-      dataType: 'jsonp',
-    }).then(response => {
-      return response.json();
-    }).then(data => {
-      this.setState({
-        locations: data.response.venues
-      })
-    })
+  state = {
+    locations: [],
+    unfiltered: [],
+    markers: []
   }
 
   // Set state using markers array passed from MapContainer component
   markers = (arr) => {
     this.setState({
       markers: arr
+    })
+  }
+
+  setLocations = (locations) => {
+    this.setState({
+      locations: locations,
+      unfiltered: locations
     })
   }
 
@@ -74,7 +60,7 @@ class App extends Component {
       // Filter locations by search and set state
       this.setState(prevState => ({
         locations: prevState.locations.filter(location =>
-          location.title.toLowerCase().indexOf(q) > -1
+          location.name.toLowerCase().indexOf(q) > -1
         )
       }))
       // Get array of markers to show and show
@@ -93,7 +79,7 @@ class App extends Component {
     } else {
       // Set state to unfiltered list of locations
       this.setState({
-        locations: Locations
+        locations: this.state.unfiltered
       })
       // Show all markers
       markers.forEach(marker => {
@@ -107,7 +93,7 @@ class App extends Component {
       <div className="App">
         <MapContainer
           markers={this.markers}
-          locations={this.state.locations} />
+          fetchedLocations={this.setLocations} />
         <Menu
           onSearch={this.filter}
           locations={this.state.locations}
