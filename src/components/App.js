@@ -41,6 +41,8 @@ class App extends Component {
         break; // Exit loop after animateMarker set
       }
     }
+    // Opens info window
+    new window.google.maps.event.trigger( animateMarker, 'click' );
     // Animate active marker
     animateMarker.setAnimation(window.google.maps.Animation.BOUNCE);
     // Stop animation after 1000ms
