@@ -3,7 +3,6 @@ import './css/App.css';
 import './css/solid.css';
 import MapContainer from './Map';
 import Menu from './Menu';
-import Locations from './data/locations'
 
 class App extends Component {
 
@@ -64,13 +63,13 @@ class App extends Component {
         )
       }))
       // Get array of markers to show and show
-      let showMarkers = markers.filter(marker =>
+      markers.filter(marker =>
         marker.title.toLowerCase().indexOf(q) > -1
       ).forEach(marker => {
         marker.setVisible(true);
       });
       // Get array of markers to hide and hide
-      let hideMarkers = markers.filter(marker =>
+      markers.filter(marker =>
         marker.title.toLowerCase().indexOf(q) < 0
       ).forEach(marker => {
         marker.setVisible(false);
