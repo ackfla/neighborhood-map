@@ -1,3 +1,5 @@
+
+/* Nav menu */
 nav {
   width: 280px;
   height: 100%;
@@ -6,25 +8,67 @@ nav {
   z-index: 100;
   position: absolute;
   top: 0;
-  left: 0;
-  transition: left 0.5s;
+  left: -280px;
+  transition: left .5s, visibility .5s;
   -webkit-box-shadow: 2px 0px 23px -4px rgba(0,0,0,0.75);
   -moz-box-shadow: 2px 0px 23px -4px rgba(0,0,0,0.75);
   box-shadow: 2px 0px 23px -4px rgba(0,0,0,0.75);
+  visibility: hidden; /* To prevent offscreen focus */
 }
 
 nav.open {
-  left: -280px;
+  left: 0;
   transition: left 0.5s;
+  visibility: visible;
 }
 
-#menu, #menu {
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li button {
+  padding: 10px 15px;
+  color: #fdfcf8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  background-color: #83003e;
+  border: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+nav li {
+  border-bottom: 1px solid #6e0938;
+}
+
+nav li:first-of-type button {
+  padding-top: 20px;
+}
+
+nav li button:hover {
+  cursor: pointer;
+  background-color: #6e0938;
+}
+
+
+/* Menu button */
+#menu {
   position: absolute;
-  left: 280px;
+  left: 0;
   top: 0;
   border: none;
   height: 47px;
   width: 47px;
+  transition: left 0.5s;
+}
+
+#menu.open {
+  left: 280px;
+  transition: left 0.5s;
 }
 
 #menu:before {
@@ -37,41 +81,10 @@ nav.open {
 #menu:hover, #menu:focus {
   background-color: #eee;
   cursor: pointer;
-  outline: none;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 
-nav li {
-  padding: 10px 15px;
-  border-bottom: 1px solid #6e0938;
-  color: #fdfcf8;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 12px;
-}
-
-.info-window p {
-  margin: 0;
-}
-
-.info-window h1 {
-  margin: 6px 0;  
-}
-
-nav li:first-of-type {
-  padding-top: 20px;
-}
-
-nav li:hover {
-  cursor: pointer;
-  background-color: #6e0938;
-}
-
+/* Search input field */
 nav input {
   width: 100%;
   box-sizing: border-box;
@@ -83,6 +96,8 @@ nav span {
   position: relative;
 }
 
+
+/* Filter icon */
 nav span:before {
   content: '\f0b0';
   font-family: 'Font Awesome 5 Free';
@@ -94,4 +109,19 @@ nav span:before {
   right: 10px;
   transform: translateY(-50%);
   z-index: 999;
+}
+
+
+/* Info windows */
+.info-window p {
+  margin: 0;
+}
+
+.info-window p:last-of-type {
+  margin-top: 20px;
+  font-weight: 700;
+}
+
+.info-window h2 {
+  margin: 6px 0;
 }

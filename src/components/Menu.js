@@ -19,13 +19,10 @@ class Menu extends Component {
 
   render() {
     return (
-      <nav id='nav'>
-        <button
-          id='menu'
-          onClick={this.handleClick}
-        />
+      <nav id='nav' className='toggle'>
         <span>
           <input
+            tabindex='2'
             type='text'
             placeholder='Filter by location'
             value={this.state.query}
@@ -35,10 +32,11 @@ class Menu extends Component {
         <ul>
           {this.props.locations.map((location) => (
             <li
-              onClick={() => this.props.handleClick(location.name)}
               key={location.id}
             >
+            <button tabindex='3' onClick={() => this.props.handleClick(location.name)}>
               {location.name}
+            </button>
             </li>
           ))}
         </ul>

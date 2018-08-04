@@ -89,6 +89,9 @@ export class MapContainer extends Component {
         styles={MapStyles}
         google={this.props.google}
         zoom={17}
+        mapTypeControl={false}
+        fullscreenControl={false}
+        streetViewControl={false}
         initialCenter={{
           lat: 51.9915247,
           lng: -2.1579078
@@ -96,12 +99,13 @@ export class MapContainer extends Component {
           <InfoWindow
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}>
-              <div className="info-window">
-                <h1>{this.state.activeMarker.title}</h1>
+              <figure className="info-window" role="dialog">
+                <h2>{this.state.activeMarker.title}</h2>
                 {this.state.activeMarker.address.map((line) => (
                   <p key={this.state.activeMarker.id}>{line}</p>
                 ))}
-              </div>
+                <p>Data provided by <a href="https://foursquare.com">FourSquare</a></p>
+              </figure>
           </InfoWindow>
         </Map>
     );

@@ -3,6 +3,7 @@ import '../css/App.css';
 import '../css/solid.css';
 import MapContainer from './Map';
 import Menu from './Menu';
+import MenuButton from './MenuButton';
 
 class App extends Component {
 
@@ -95,6 +96,7 @@ class App extends Component {
         <MapContainer
           markers={this.markers}
           fetchedLocations={this.setLocations} />
+        <MenuButton />
         <Menu
           onSearch={this.filter}
           locations={this.state.locations}
